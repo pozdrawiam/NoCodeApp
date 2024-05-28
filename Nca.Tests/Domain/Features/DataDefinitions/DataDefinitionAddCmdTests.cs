@@ -16,10 +16,19 @@ public class DataDefinitionAddCmdTests
     [Fact]
     public async Task Should_save_to_db()
     {
-        var cmd = new DataDefinitionAddCmd();
+        var cmd = new DataDefinitionAddCmd
+        {
+            Name = "Products",
+            Fields = new List<DataDefinitionAddCmd.FieldDto>
+            {
+                new() { Name = "Name" },
+                new() { Name = "Description" }
+            }
+        };
 
         await _handler.ExecuteAsync(cmd);
         
         Assert.Single(_db.DataDefinitions);
+        Assert.Equal(2, _db.FieldDefinitions.Count());
     }
 }
