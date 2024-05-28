@@ -7,5 +7,6 @@ public enum FieldType : byte
     Decimal = 3,
     Boolean = 4,
     Date = 5,
-    DateTime = 6
+    DateTime = 6,
+    TextArea = 7
 }
