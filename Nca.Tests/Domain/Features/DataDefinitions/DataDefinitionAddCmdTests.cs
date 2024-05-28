@@ -26,9 +26,13 @@ public class DataDefinitionAddCmdTests
             }
         };
 
+        // Act
         await _handler.ExecuteAsync(cmd);
+
+        var dataDefinition = _db.DataDefinitions.Single();
         
-        Assert.Single(_db.DataDefinitions);
+        Assert.Contains(dataDefinition.Fields, x => x.Name == cmd.Fields[0].Name);
+        Assert.Contains(dataDefinition.Fields, x => x.Name == cmd.Fields[1].Name);
         Assert.Equal(2, _db.FieldDefinitions.Count());
     }
 }

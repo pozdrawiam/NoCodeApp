@@ -12,7 +12,7 @@ public class DataDefinitionAddCmdHandler(IDb db)
             Name = cmd.Name,
             Fields = cmd.Fields.Select(f => new FieldDefinition
             {
-                
+                Name = f.Name
             }).ToList()
         };
 
