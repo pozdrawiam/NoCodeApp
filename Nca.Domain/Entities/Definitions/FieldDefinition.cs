@@ -1,4 +1,6 @@
-﻿namespace Nca.Domain.Entities.Definitions;
+﻿using Nca.Domain.Entities.Values;
+
+namespace Nca.Domain.Entities.Definitions;
 
 public class FieldDefinition
 {
@@ -19,4 +21,6 @@ public class FieldDefinition
     public bool ShowOnList { get; set; }
 
     public int Sequence { get; set; }
+    
+    public virtual ICollection<FieldValue> Values { get; set; } = new List<FieldValue>();
 }
