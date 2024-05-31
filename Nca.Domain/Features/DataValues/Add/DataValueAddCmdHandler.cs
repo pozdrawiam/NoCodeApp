@@ -1,11 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Nca.Core.Cqs;
 using Nca.Domain.Entities;
 using Nca.Domain.Entities.Values;
+using System.ComponentModel.DataAnnotations;
 
 namespace Nca.Domain.Features.DataValues.Add;
 
-public class DataValueAddCmdHandler(IDb db)
+public class DataValueAddCmdHandler(IDb db) : Cmd<DataValueAddCmd>
 {
-    public async Task ExecuteAsync(DataValueAddCmd cmd)
+    protected override async Task Execute(DataValueAddCmd cmd)
     {
         var entity = new DataValue
         {
@@ -20,5 +23,13 @@ public class DataValueAddCmdHandler(IDb db)
         db.DataValues.Add(entity);
 
         await db.SaveChangesAsync();
+    }
+
+    protected override async IAsyncEnumerable<ValidationResult> Validate(DataValueAddCmd cmd)
+    {
+        if (!await db.DataDefinitions.AnyAsync(x => x.Id == cmd.DataDefinitionId))
+        {
+            yield return new ValidationResult("Not exists", new []{ nameof(cmd.DataDefinitionId) });
+        }
     }
 }

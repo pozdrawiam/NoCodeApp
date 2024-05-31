@@ -6,14 +6,27 @@ public abstract class Cmd<TCmd> : ICmd<TCmd>
 {
     public async Task ExecuteAsync(TCmd cmd)
     {
-        await Validate(cmd);
+        var errors = new List<ValidationResult>();
+
+        await foreach (var error in Validate(cmd))
+        {
+            errors.Add(error);
+        }
+
+        if (errors.Count > 0)
+        {
+            throw new Exception("Validation errors"); //todo throw exception with error list
+        }
+        
         await Execute(cmd);
     }
 
     protected abstract Task Execute(TCmd cmd);
 
-    protected virtual async Task<IEnumerable<ValidationResult>> Validate(TCmd cmd)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+    protected virtual async IAsyncEnumerable<ValidationResult> Validate(TCmd cmd)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
-        return await Task.FromResult(Array.Empty<ValidationResult>());
+        yield break;
     }
 }
