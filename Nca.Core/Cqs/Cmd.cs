@@ -1,3 +1,4 @@
+using Nca.Core.Exceptions;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nca.Core.Cqs;
@@ -15,7 +16,7 @@ public abstract class Cmd<TCmd> : ICmd<TCmd>
 
         if (errors.Count > 0)
         {
-            throw new Exception("Validation errors"); //todo throw exception with error list
+            throw new AppValidationException(errors);
         }
         
         await Execute(cmd);
