@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Nca.Core.Cqs;
 
-public abstract class Cmd<TCmd> : ICmd<TCmd>
+public abstract class CmdHandler<TCmd> : ICmdHandler<TCmd>
 {
     public async Task ExecuteAsync(TCmd cmd)
     {

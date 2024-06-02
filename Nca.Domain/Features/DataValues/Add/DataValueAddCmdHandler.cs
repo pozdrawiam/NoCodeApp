@@ -4,7 +4,7 @@ using Nca.Domain.Entities.Values;
 
 namespace Nca.Domain.Features.DataValues.Add;
 
-public class DataValueAddCmdHandler(IDb db) : Cmd<DataValueAddCmd>
+public class DataValueAddCmdHandler(IDb db) : CmdHandler<DataValueAddCmd>
 {
     protected override async Task Execute(DataValueAddCmd cmd)
     {
