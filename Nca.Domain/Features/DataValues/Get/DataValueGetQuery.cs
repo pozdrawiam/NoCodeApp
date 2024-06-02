@@ -1,6 +1,3 @@
 namespace Nca.Domain.Features.DataValues.Get;
 
-public class DataValueGetQuery
-{
-    
-}
+public class DataValueGetQuery : QueryById;
