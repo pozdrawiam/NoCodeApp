@@ -1,5 +1,3 @@
-using Nca.Core.Cqs;
-
 namespace Nca.Domain.Features.DataValues.Get;
 
 public class DataValueGetQueryHandler(IDb db) 

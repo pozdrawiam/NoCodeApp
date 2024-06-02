@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nca.Domain.Entities;
 
 namespace Nca.Tests;
 

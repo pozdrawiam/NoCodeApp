@@ -1,4 +1,3 @@
-using Nca.Domain.Entities;
 using Nca.Domain.Entities.Definitions;
 using Nca.Domain.Features.DataValues.Add;
 

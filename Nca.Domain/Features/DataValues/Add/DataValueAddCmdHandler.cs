@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Nca.Core.Cqs;
 using Nca.Domain.Entities.Values;
 
 namespace Nca.Domain.Features.DataValues.Add;
