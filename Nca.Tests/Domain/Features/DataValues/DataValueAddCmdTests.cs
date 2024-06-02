@@ -1,4 +1,5 @@
 using Nca.Domain.Entities;
+using Nca.Domain.Entities.Definitions;
 using Nca.Domain.Features.DataValues.Add;
 
 namespace Nca.Tests.Domain.Features.DataValues;
@@ -16,6 +17,19 @@ public class DataValueAddCmdTests
     [Fact]
     public async Task Should_save_to_db()
     {
+        var dataDefinition = new DataDefinition
+        {
+            Id = 1,
+            Fields = new List<FieldDefinition>
+            {
+                new() { Id = 1 },
+                new() { Id = 2 }
+            }
+        };
+
+        _db.DataDefinitions.Add(dataDefinition);
+        await _db.SaveChangesAsync();
+        
         var cmd = new DataValueAddCmd
         {
             DataDefinitionId = 1,
