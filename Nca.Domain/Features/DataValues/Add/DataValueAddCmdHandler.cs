@@ -29,8 +29,19 @@ public class DataValueAddCmdHandler(IDb db) : Cmd<DataValueAddCmd>
     protected override async IAsyncEnumerable<ValidationResult> Validate(DataValueAddCmd cmd)
     {
         if (!await db.DataDefinitions.AnyAsync(x => x.Id == cmd.DataDefinitionId))
-        {
             yield return Validation.ResultFromMember(nameof(cmd.DataDefinitionId));
+        
+        if (cmd.Fields.Count == 0)
+            yield return Validation.ResultFromMember(nameof(cmd.Fields));
+        else
+        {
+            for (var i = 0; i < cmd.Fields.Count; i++)
+            {
+                var field = cmd.Fields[i];
+                
+                if (!await db.FieldDefinitions.AnyAsync(x => x.Id == field.FieldDefinitionId))
+                    yield return Validation.ResultFromMember($"{nameof(cmd.DataDefinitionId)}[{i}]");
+            }
         }
     }
 }
