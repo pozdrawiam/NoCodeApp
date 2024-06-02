@@ -1,6 +1,4 @@
-﻿using Nca.Core.Entities;
-
-namespace Nca.Domain.Entities.Definitions;
+﻿namespace Nca.Domain.Entities.Definitions;
 
 public class DataDefinition : BaseEntity
 {

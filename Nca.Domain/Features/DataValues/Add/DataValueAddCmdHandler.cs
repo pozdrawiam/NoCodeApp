@@ -1,9 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Nca.Core.Cqs;
-using Nca.Core.Utils;
-using Nca.Domain.Entities;
 using Nca.Domain.Entities.Values;
-using System.ComponentModel.DataAnnotations;
 
 namespace Nca.Domain.Features.DataValues.Add;
 

@@ -1,4 +1,3 @@
-using Nca.Core.Entities;
 using Nca.Domain.Entities.Definitions;
 
 namespace Nca.Domain.Entities.Values;

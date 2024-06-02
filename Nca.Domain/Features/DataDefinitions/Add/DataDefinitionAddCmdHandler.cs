@@ -1,5 +1,4 @@
-﻿using Nca.Domain.Entities;
-using Nca.Domain.Entities.Definitions;
+﻿using Nca.Domain.Entities.Definitions;
 
 namespace Nca.Domain.Features.DataDefinitions.Add;
 

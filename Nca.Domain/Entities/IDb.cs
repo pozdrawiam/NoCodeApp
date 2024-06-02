@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nca.Core.Entities;
 using Nca.Domain.Entities.Definitions;
 using Nca.Domain.Entities.Values;
 
