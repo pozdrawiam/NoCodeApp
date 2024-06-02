@@ -1,11 +1,10 @@
+using Nca.Core.Entities;
 using Nca.Domain.Entities.Definitions;
 
 namespace Nca.Domain.Entities.Values;
 
-public class DataValue
+public class DataValue : BaseEntity
 {
-    public int Id { get; set; }
-    
     public int DataDefinitionId { get; set; }
     
     public virtual DataDefinition? DataDefinition { get; set; }

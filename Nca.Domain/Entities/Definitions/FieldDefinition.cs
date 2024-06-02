@@ -1,11 +1,10 @@
-﻿using Nca.Domain.Entities.Values;
+﻿using Nca.Core.Entities;
+using Nca.Domain.Entities.Values;
 
 namespace Nca.Domain.Entities.Definitions;
 
-public class FieldDefinition
+public class FieldDefinition : BaseEntity
 {
-    public int Id { get; set; }
-
     public int DataDefinitionId { get; set; }
     
     public virtual DataDefinition? DataDefinition { get; set; }

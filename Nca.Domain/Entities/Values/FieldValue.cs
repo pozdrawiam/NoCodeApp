@@ -1,11 +1,10 @@
+using Nca.Core.Entities;
 using Nca.Domain.Entities.Definitions;
 
 namespace Nca.Domain.Entities.Values;
 
-public class FieldValue
+public class FieldValue : BaseEntity
 {
-    public int Id { get; set; }
-
     public int DataValueId { get; set; }
 
     public DataValue? DataValue { get; set; }
