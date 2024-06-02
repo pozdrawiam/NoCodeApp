@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Nca.Core.Cqs;
+using Nca.Core.Utils;
 using Nca.Domain.Entities;
 using Nca.Domain.Entities.Values;
 using System.ComponentModel.DataAnnotations;
@@ -29,7 +30,7 @@ public class DataValueAddCmdHandler(IDb db) : Cmd<DataValueAddCmd>
     {
         if (!await db.DataDefinitions.AnyAsync(x => x.Id == cmd.DataDefinitionId))
         {
-            yield return new ValidationResult("Not exists", new []{ nameof(cmd.DataDefinitionId) });
+            yield return Validation.ResultFromMember(nameof(cmd.DataDefinitionId));
         }
     }
 }
