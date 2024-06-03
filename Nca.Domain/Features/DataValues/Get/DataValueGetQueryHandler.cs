@@ -19,7 +19,7 @@ public class DataValueGetQueryHandler(IDb db)
         {
             FieldValue? fieldValue = entity.Fields.FirstOrDefault(x => x.FieldDefinitionId == fieldDefinition.Id);
 
-            resultValues[fieldDefinition.Name] = fieldValue != null ? fieldValue.Value : null; //todo default value
+            resultValues[fieldDefinition.Name] = fieldValue != null ? fieldValue.Value : fieldDefinition.DefaultValue;
         }
 
         return new DataValueGetQueryResult(resultValues);
