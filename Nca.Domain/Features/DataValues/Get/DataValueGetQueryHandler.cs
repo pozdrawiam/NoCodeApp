@@ -1,3 +1,6 @@
+using Nca.Domain.Entities.Definitions;
+using Nca.Domain.Entities.Values;
+
 namespace Nca.Domain.Features.DataValues.Get;
 
 public class DataValueGetQueryHandler(IDb db) 
@@ -5,11 +8,20 @@ public class DataValueGetQueryHandler(IDb db)
 {
     public async Task<DataValueGetQueryResult?> ExecuteAsync(DataValueGetQuery query)
     {
-        var entity = await db.DataValues.FindAsync(query.Id);
+        DataValue? entity = await db.DataValues.FindAsync(query.Id);
 
         if (entity == null)
             return null;
 
-        return new DataValueGetQueryResult(new Dictionary<string, string?>()); //todo fields
+        var resultValues = new Dictionary<string, string?>();
+
+        foreach (FieldDefinition fieldDefinition in entity.DataDefinition.Fields.OrderBy(x => x.Sequence).ThenBy(x => x.Id))
+        {
+            FieldValue? fieldValue = entity.Fields.FirstOrDefault(x => x.FieldDefinitionId == fieldDefinition.Id);
+
+            resultValues[fieldDefinition.Name] = fieldValue != null ? fieldValue.Value : null; //todo default value
+        }
+
+        return new DataValueGetQueryResult(resultValues);
     }
 }
