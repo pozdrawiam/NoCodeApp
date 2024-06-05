@@ -1,8 +1,8 @@
 namespace Nca.Domain.Features.DataDefinitions.List;
 
-public class DataDefinitionListQueryResult(DataDefinitionListQueryResult.EntryDto[] entries)
+public class DataDefinitionListQueryResult(IReadOnlyCollection<DataDefinitionListQueryResult.EntryDto> entries)
 {
-    public EntryDto[] Entries { get; set; } = entries;
+    public IReadOnlyCollection<EntryDto> Entries { get; set; } = entries;
 
     public class EntryDto
     {
