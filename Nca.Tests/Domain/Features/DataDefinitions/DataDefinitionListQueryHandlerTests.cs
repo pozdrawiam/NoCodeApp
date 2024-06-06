@@ -47,7 +47,13 @@ public class DataDefinitionListQueryHandlerTests
         var result = await _handler.ExecuteAsync(query);
         
         Assert.Equal(2, result.Entries.Count);
-        Assert.Equal("Def1", result.Entries.First().Name);
-        Assert.Equal("Def2", result.Entries.ElementAt(1).Name);
+
+        var first = result.Entries.First();
+        var second = result.Entries.ElementAt(1);
+        
+        Assert.Equal("Def1", first.Name);
+        Assert.Equal("Def2", second.Name);
+        Assert.Equal(1, first.FieldsCount);
+        Assert.Equal(2, second.FieldsCount);
     }
 }
