@@ -1,10 +1,17 @@
-﻿namespace Nca.Domain.Features.DataDefinitions.Delete;
+﻿using Nca.Domain.Entities.Definitions;
+
+namespace Nca.Domain.Features.DataDefinitions.Delete;
 
 public class DataDefinitionsDeleteCmdHandler(IDb db)
     : CmdHandler<DataDefinitionsDeleteCmd>
 {
-    protected override Task Execute(DataDefinitionsDeleteCmd cmd)
+    protected override async Task Execute(DataDefinitionsDeleteCmd cmd)
     {
-        throw new NotImplementedException();
+        int[] ids = cmd.Ids.Distinct().ToArray();
+        IQueryable<DataDefinition> definitions = db.DataDefinitions.Where(x => ids.Contains(x.Id));
+
+        db.DataDefinitions.RemoveRange(definitions);
+
+        await db.SaveChangesAsync();
     }
 }
