@@ -1,4 +1,5 @@
 ﻿using Nca.Domain.Entities.Definitions;
+using Nca.Domain.Entities.Values;
 using Nca.Domain.Features.DataDefinitions.Delete;
 
 namespace Nca.Tests.Domain.Features.DataDefinitions;
@@ -47,5 +48,32 @@ public class DataDefinitionsDeleteCmdTests
         Assert.Equal(1, _db.DataDefinitions.Count());
         Assert.Equal(1, _db.FieldDefinitions.Count());
         Assert.Equal("Def2", _db.DataDefinitions.Single(x => x.Id == 2).Name);
+    }
+
+    [Fact]
+    public async Task Should_not_delete_when_values_exists()
+    {
+        var dataDefinition = new DataDefinition
+        {
+            Id = 1,
+            Name = "Def1",
+            Fields = new List<FieldDefinition> { new() { Id = 1 } }
+        };
+        
+        var value = new DataValue
+        {
+            Id = 1, 
+            DataDefinitionId = 1
+        };
+
+        _db.DataDefinitions.Add(dataDefinition);
+        _db.DataValues.Add(value);
+        await _db.SaveChangesAsync();
+
+        var cmd = new DataDefinitionsDeleteCmd { Ids = [1] };
+
+        await _handler.ExecuteAsync(cmd);
+        
+        Assert.Equal(1, _db.DataDefinitions.Count());
     }
 }
