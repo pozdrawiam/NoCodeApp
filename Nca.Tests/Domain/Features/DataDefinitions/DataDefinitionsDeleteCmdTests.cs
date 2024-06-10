@@ -51,7 +51,7 @@ public class DataDefinitionsDeleteCmdTests
     }
 
     [Fact]
-    public async Task Should_not_delete_when_values_exists()
+    public async Task Should_delete_with_values()
     {
         var dataDefinition = new DataDefinition
         {
@@ -74,6 +74,7 @@ public class DataDefinitionsDeleteCmdTests
 
         await _handler.ExecuteAsync(cmd);
         
-        Assert.Equal(1, _db.DataDefinitions.Count());
+        Assert.Equal(0, _db.DataDefinitions.Count());
+        Assert.Equal(0, _db.DataValues.Count());
     }
 }
