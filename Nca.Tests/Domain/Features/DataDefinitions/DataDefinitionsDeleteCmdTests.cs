@@ -43,6 +43,7 @@ public class DataDefinitionsDeleteCmdTests
 
         var cmd = new DataDefinitionsDeleteCmd { Ids = [1, 3] };
 
+        // Act
         await _handler.ExecuteAsync(cmd);
 
         Assert.Equal(1, _db.DataDefinitions.Count());
@@ -72,6 +73,7 @@ public class DataDefinitionsDeleteCmdTests
 
         var cmd = new DataDefinitionsDeleteCmd { Ids = [1] };
 
+        // Act
         await _handler.ExecuteAsync(cmd);
         
         Assert.Equal(0, _db.DataDefinitions.Count());
