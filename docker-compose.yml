@@ -1,0 +1,6 @@
+﻿services:
+  nca.web:
+    image: nca.web
+    build:
+      context: .
+      dockerfile: Nca.Web/Dockerfile
