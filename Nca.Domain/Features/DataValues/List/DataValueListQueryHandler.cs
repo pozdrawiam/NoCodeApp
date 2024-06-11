@@ -14,7 +14,10 @@ public class DataValueListQueryHandler(IDb db)
         if (definition == null)
             return new DataValueListQueryResult();
 
-        FieldValue[] fieldValues = await db.DataValues.Where(x => x.DataDefinitionId == definition.Id).SelectMany(x => x.Fields).ToArrayAsync();
+        FieldValue[] fieldValues = await db.DataValues
+            .Where(x => x.DataDefinitionId == definition.Id)
+            .SelectMany(x => x.Fields)
+            .ToArrayAsync();
 
         List<List<string>> rows = fieldValues.GroupBy(x => x.DataValueId)
             .Select(valuesGroup => definition.Fields
