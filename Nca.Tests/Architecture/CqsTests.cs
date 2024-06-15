@@ -11,8 +11,7 @@ public class CqsTests
     public void Cmd_handlers_should_implement_interface()
     {
         var assembly = Assembly.Load(DomainAssemblyName);
-        var types = assembly.GetTypes();
-        var cmdHandlerTypes = types.Where(t => t.Name.EndsWith("CmdHandler")).ToArray();
+        var cmdHandlerTypes = assembly.GetTypes().Where(t => t.Name.EndsWith("CmdHandler")).ToArray();
 
         foreach (var type in cmdHandlerTypes)
         {
