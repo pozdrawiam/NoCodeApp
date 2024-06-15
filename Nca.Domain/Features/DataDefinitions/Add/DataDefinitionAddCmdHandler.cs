@@ -2,7 +2,8 @@
 
 namespace Nca.Domain.Features.DataDefinitions.Add;
 
-public class DataDefinitionAddCmdHandler(IDb db)
+public class DataDefinitionAddCmdHandler(IDb db) 
+    : ICmdHandler<DataDefinitionAddCmd>
 {
     public async Task ExecuteAsync(DataDefinitionAddCmd cmd)
     {
