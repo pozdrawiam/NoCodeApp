@@ -3,12 +3,12 @@ using Nca.Domain.Features.DataDefinitions.List;
 
 namespace Nca.Tests.Domain.Features.DataDefinitions;
 
-public class DataDefinitionListQueryHandlerTests
+public class DataDefinitionListQueryTests
 {
     private readonly DataDefinitionListQueryHandler _handler;
     private readonly IDb _db = TestHelper.CreateInMemoryDb();
 
-    public DataDefinitionListQueryHandlerTests()
+    public DataDefinitionListQueryTests()
     {
         _handler = new DataDefinitionListQueryHandler(_db);
     }
