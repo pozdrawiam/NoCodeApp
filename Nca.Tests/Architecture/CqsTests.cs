@@ -32,6 +32,18 @@ public class CqsTests
         Assert.NotEmpty(cmdHandlerTypes);
     }
 
+    [Fact(Skip = "todo")]
+    public void Cmd_handlers_name_should_valid()
+    {
+        var assembly = Assembly.Load(DomainAssemblyName);
+        var cmdHandlerTypes = assembly.GetTypes()
+            .Where(t => t.GetInterfaces()
+                .Any(i => i.IsGenericType && typeof(ICmdHandler<>) == i.GetGenericTypeDefinition()))
+            .ToArray();
+        
+        Assert.NotEmpty(cmdHandlerTypes);
+    }
+
     [Fact]
     public void Query_handlers_should_implement_interface()
     {
