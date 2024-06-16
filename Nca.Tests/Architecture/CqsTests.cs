@@ -31,4 +31,40 @@ public class CqsTests
         
         Assert.NotEmpty(cmdHandlerTypes);
     }
+
+    [Fact]
+    public void Query_handlers_should_implement_interface()
+    {
+        var assembly = Assembly.Load(DomainAssemblyName);
+        var queryHandlerTypes = assembly.GetTypes().Where(t => t.Name.EndsWith("QueryHandler")).ToArray();
+
+        foreach (var type in queryHandlerTypes)
+        {
+            var iType = type.GetInterfaces()
+                .FirstOrDefault(x => x.Name.Contains(nameof(IQueryHandler<object, object>)));
+
+            if (iType == null)
+                Assert.Fail($"No interface {nameof(IQueryHandler<object, object>)} for query handler {type.Name}");
+            
+            if (!iType.IsGenericType)
+                Assert.Fail($"$Type {iType.Name} is not generic in query handler {type.Name}");
+
+            var gArgs = iType.GetGenericTypeDefinition().GetGenericArguments();
+            var queryType = gArgs[0];
+
+            if (!queryType.Name.EndsWith("Query"))
+                Assert.Fail($"Invalid Query type name: {type.Name} : {iType.Name}<{queryType.Name}, ...>");
+
+            var resultType = gArgs[1];
+
+            if (!resultType.Name.EndsWith("Result"))
+            {
+                Assert.Fail(
+                    $"Invalid Query type name: {type.Name} : {iType.Name}<{queryType.Name}, {resultType.Name}>"
+                    );
+            }
+        }
+        
+        Assert.NotEmpty(queryHandlerTypes);
+    }
 }
