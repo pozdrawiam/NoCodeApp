@@ -32,14 +32,20 @@ public class CqsTests
         Assert.NotEmpty(cmdHandlerTypes);
     }
 
-    [Fact(Skip = "todo")]
-    public void Cmd_handlers_name_should_valid()
+    [Fact]
+    public void Cmd_handlers_name_should_valid_suffix()
     {
         var assembly = Assembly.Load(DomainAssemblyName);
         var cmdHandlerTypes = assembly.GetTypes()
             .Where(t => t.GetInterfaces()
                 .Any(i => i.IsGenericType && typeof(ICmdHandler<>) == i.GetGenericTypeDefinition()))
             .ToArray();
+
+        foreach (var type in cmdHandlerTypes)
+        {
+            if (!type.Name.EndsWith("CmdHandler"))
+                Assert.Fail($"Invalid name suffix for cmd handler '{type.Name}'");
+        }
         
         Assert.NotEmpty(cmdHandlerTypes);
     }
