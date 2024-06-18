@@ -49,6 +49,24 @@ public class CqsTests
         
         Assert.NotEmpty(cmdHandlerTypes);
     }
+    
+    [Fact]
+    public void Query_handlers_name_should_valid_suffix()
+    {
+        var assembly = Assembly.Load(DomainAssemblyName);
+        var queryHandlerTypes = assembly.GetTypes()
+            .Where(t => t.GetInterfaces()
+                .Any(i => i.IsGenericType && typeof(IQueryHandler<,>) == i.GetGenericTypeDefinition()))
+            .ToArray();
+
+        foreach (var type in queryHandlerTypes)
+        {
+            if (!type.Name.EndsWith("QueryHandler"))
+                Assert.Fail($"Invalid name suffix for query handler '{type.Name}'");
+        }
+        
+        Assert.NotEmpty(queryHandlerTypes);
+    }
 
     [Fact]
     public void Query_handlers_should_implement_interface()
