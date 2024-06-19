@@ -13,4 +13,10 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Nca.Core\Nca.Core.csproj" />
+      <ProjectReference Include="..\Nca.Domain\Nca.Domain.csproj" />
+      <ProjectReference Include="..\Nca.Infrastructure\Nca.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
