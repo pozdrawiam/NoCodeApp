@@ -21,12 +21,12 @@ Contributions and feedback are welcome, but please note that the project is inco
 - testing: xUnit, NSubstitute
 
 ## Run from source
-```
+```sh
 dotnet run --project Nca.Web
 ```
 
 ## Publish
-```
+```sh
 dotnet publish Nca.Web -c Release
 ```
 or use build script from _scripts_ directory.
