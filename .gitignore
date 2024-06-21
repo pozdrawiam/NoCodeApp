@@ -397,3 +397,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 .idea
+
+# Project
+Nca.Web/appsettings.Development.json
+Nca.Web/data/*.db*
