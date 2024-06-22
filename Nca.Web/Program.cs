@@ -20,6 +20,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    Db? db = scope.ServiceProvider.GetRequiredService<IDb>() as Db;
+    
+    if (await db!.Database.EnsureCreatedAsync())
+        app.Logger.LogDebug("Db created");
+}
+
 app.Logger.LogInformation("Starting app at {Date}", DateTime.Now);
 
 app.Run();
