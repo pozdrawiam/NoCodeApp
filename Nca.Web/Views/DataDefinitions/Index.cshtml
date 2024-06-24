@@ -1,0 +1,15 @@
+@model Nca.Domain.Features.DataDefinitions.List.DataDefinitionListQueryResult
+
+@{
+    ViewBag.Title = "title";
+    //Layout = "_Layout";
+}
+
+<h2>Data definitions</h2>
+
+@foreach (var entry in Model.Entries)
+{
+    @entry.Name
+    @Html.ActionLink("", "Edit", new { id = entry.Id })
+    <br>
+}
