@@ -1,4 +1,5 @@
 using Nca.Domain.Entities;
+using Nca.Domain.Features.DataDefinitions.Add;
 using Nca.Domain.Features.DataDefinitions.List;
 using Nca.Infrastructure.Storage;
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IDb, SqliteDb>(_ => new SqliteDb(builder.Configuration["DbConnection"]!));
 
 builder.Services.AddTransient<DataDefinitionListQueryHandler>();
+builder.Services.AddTransient<DataDefinitionAddCmdHandler>();
 
 var app = builder.Build();
 

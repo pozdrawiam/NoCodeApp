@@ -1,0 +1,14 @@
+@model Nca.Domain.Features.DataDefinitions.Add.DataDefinitionAddCmd
+
+@{
+    Layout = null;
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.Name)
+    
+    <button type="submit">Save</button>
+}
