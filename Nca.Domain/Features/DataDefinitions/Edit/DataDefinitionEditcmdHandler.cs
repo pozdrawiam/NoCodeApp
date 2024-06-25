@@ -2,7 +2,7 @@
 
 namespace Nca.Domain.Features.DataDefinitions.Edit;
 
-public class DataDefinitionEditHandler(IDb db) 
+public class DataDefinitionEditcmdHandler(IDb db) 
     : ICmdHandler<DataDefinitionEditCmd>
 {
     public async Task ExecuteAsync(DataDefinitionEditCmd cmd)
