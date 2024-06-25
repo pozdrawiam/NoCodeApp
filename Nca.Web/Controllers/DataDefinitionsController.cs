@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Nca.Domain.Features.DataDefinitions.Add;
+using Nca.Domain.Features.DataDefinitions.Edit;
 using Nca.Domain.Features.DataDefinitions.List;
 
 namespace Nca.Web.Controllers;
@@ -25,6 +26,28 @@ public class DataDefinitionsController(IServiceProvider services)
     public async Task<IActionResult> Add(DataDefinitionAddCmd cmd)
     {
         var handler = services.GetService<DataDefinitionAddCmdHandler>();
+        await handler!.ExecuteAsync(cmd);
+        
+        return RedirectToAction("Index");
+    }
+    
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        //fetch by id
+        
+        var cmd = new DataDefinitionEditCmd
+        {
+            Id = id
+        };
+        
+        return View(cmd);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Edit(DataDefinitionEditCmd cmd)
+    {
+        var handler = services.GetService<DataDefinitionEditCmdHandler>();
         await handler!.ExecuteAsync(cmd);
         
         return RedirectToAction("Index");
