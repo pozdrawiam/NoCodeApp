@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Nca.Core.Exceptions;
 using Nca.Domain.Features.DataDefinitions.Add;
 using Nca.Domain.Features.DataDefinitions.Edit;
+using Nca.Domain.Features.DataDefinitions.Get;
 using Nca.Domain.Features.DataDefinitions.List;
 
 namespace Nca.Web.Controllers;
@@ -32,13 +34,20 @@ public class DataDefinitionsController(IServiceProvider services)
     }
     
     [HttpGet]
-    public IActionResult Edit(int id)
+    public async Task<IActionResult> Edit(int id)
     {
-        //fetch by id
+        var handler = services.GetService<DataDefinitionGetQueryHandler>();
+        var result = await handler!.ExecuteAsync(new DataDefinitionGetQuery { Id = id});
+
+        if (result == null)
+        {
+            throw new NotFoundException();
+        }
         
         var cmd = new DataDefinitionEditCmd
         {
-            Id = id
+            Id = result.Id,
+            Name = result.Name
         };
         
         return View(cmd);
