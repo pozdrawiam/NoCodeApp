@@ -1,11 +1,14 @@
+@using Nca.Domain.Features.DataDefinitions.Get
 @model Nca.Domain.Features.DataValues.List.DataValueListQueryResult
 
 @{
     ViewBag.Title = "title";
     //Layout = "_Layout";
+
+    var definition = (DataDefinitionGetQueryResult)ViewBag.Definition;
 }
 
-<h2>Data values</h2>
+<h2>@definition.Name data values</h2>
 
 @Html.ActionLink("Add", "Add")
 <br>

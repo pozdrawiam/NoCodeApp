@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Nca.Core.Exceptions;
+using Nca.Domain.Features.DataDefinitions.Get;
 using Nca.Domain.Features.DataValues.List;
 
 namespace Nca.Web.Controllers;
@@ -8,10 +10,14 @@ public class DataValuesController(IServiceProvider services)
 {
     public async Task<IActionResult> Index(int id)
     {
-        var cmd = new DataValueListQuery { DataDefinitionId = id };
-        var handler = services.GetService<DataValueListQueryHandler>();
-        var result = await handler!.ExecuteAsync(cmd);
+        var definitionQuery = new DataDefinitionGetQuery { Id = id };
+        var definitionHandler = services.GetService<DataDefinitionGetQueryHandler>();
+        ViewBag.Definition = await definitionHandler!.ExecuteAsync(definitionQuery) ?? throw new NotFoundException();
+        
+        var valuesQuery = new DataValueListQuery { DataDefinitionId = id };
+        var valuesHandler = services.GetService<DataValueListQueryHandler>();
+        var valuesResult = await valuesHandler!.ExecuteAsync(valuesQuery);
 
-        return View(result);
+        return View(valuesResult);
     }
 }
