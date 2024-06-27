@@ -7,9 +7,18 @@
 
 <h2>Data definitions</h2>
 
+@Html.ActionLink("Add", "Add")
+<br>
+<br>
+
 @foreach (var entry in Model.Entries)
 {
-    @entry.Name
-    @* @Html.ActionLink("Edit", "Edit", new { id = entry.Id }) *@
-    <br>
+    <div>
+        @entry.Name
+        &nbsp;
+        @Html.ActionLink("Edit", "Edit", new { id = entry.Id })
+        &nbsp;
+        @Html.ActionLink("Delete", "Delete", new { id = entry.Id })
+        <br>
+    </div>
 }
