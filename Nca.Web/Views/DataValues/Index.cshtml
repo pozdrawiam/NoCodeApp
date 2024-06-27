@@ -1,0 +1,23 @@
+@model Nca.Domain.Features.DataValues.List.DataValueListQueryResult
+
+@{
+    ViewBag.Title = "title";
+    //Layout = "_Layout";
+}
+
+<h2>Data values</h2>
+
+@Html.ActionLink("Add", "Add")
+<br>
+<br>
+
+@foreach (var entry in Model.Values)
+{
+    <div>
+        @foreach (var value in entry)
+        {
+            <span>@value &nbsp;</span>
+        }
+    </div>
+    <br>
+}
