@@ -18,48 +18,48 @@ public class DataDefinitionsController(IServiceProvider services)
 
         return View(result);
     }
-    
+
     [HttpGet]
     public IActionResult Add()
     {
         return View();
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Add(DataDefinitionAddCmd cmd)
     {
         var handler = services.GetService<DataDefinitionAddCmdHandler>();
         await handler!.ExecuteAsync(cmd);
-        
+
         return RedirectToAction("Index");
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
         var handler = services.GetService<DataDefinitionGetQueryHandler>();
-        var result = await handler!.ExecuteAsync(new DataDefinitionGetQuery { Id = id});
+        var result = await handler!.ExecuteAsync(new DataDefinitionGetQuery { Id = id });
 
         if (result == null)
         {
             throw new NotFoundException();
         }
-        
+
         var cmd = new DataDefinitionEditCmd
         {
             Id = result.Id,
             Name = result.Name
         };
-        
+
         return View(cmd);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Edit(DataDefinitionEditCmd cmd)
     {
         var handler = services.GetService<DataDefinitionEditCmdHandler>();
         await handler!.ExecuteAsync(cmd);
-        
+
         return RedirectToAction("Index");
     }
 
@@ -70,11 +70,11 @@ public class DataDefinitionsController(IServiceProvider services)
 
         var cmd = new DataDefinitionsDeleteCmd
         {
-            Ids = new [] { id }
+            Ids = new[] { id }
         };
-            
+
         await handler!.ExecuteAsync(cmd);
-        
+
         return RedirectToAction("Index");
     }
 }
