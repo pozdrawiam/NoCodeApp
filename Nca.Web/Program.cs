@@ -4,6 +4,7 @@ using Nca.Domain.Features.DataDefinitions.Delete;
 using Nca.Domain.Features.DataDefinitions.Edit;
 using Nca.Domain.Features.DataDefinitions.Get;
 using Nca.Domain.Features.DataDefinitions.List;
+using Nca.Domain.Features.DataValues.List;
 using Nca.Infrastructure.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,8 @@ builder.Services.AddTransient<DataDefinitionGetQueryHandler>();
 builder.Services.AddTransient<DataDefinitionAddCmdHandler>();
 builder.Services.AddTransient<DataDefinitionEditCmdHandler>();
 builder.Services.AddTransient<DataDefinitionsDeleteCmdHandler>();
+
+builder.Services.AddTransient<DataValueListQueryHandler>();
 
 var app = builder.Build();
 

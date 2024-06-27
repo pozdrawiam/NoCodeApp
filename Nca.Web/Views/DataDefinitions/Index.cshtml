@@ -16,6 +16,8 @@
     <div>
         @entry.Name
         &nbsp;
+        @Html.ActionLink("Values", "Index", "DataValues", new { id = entry.Id })
+        &nbsp;
         @Html.ActionLink("Edit", "Edit", new { id = entry.Id })
         &nbsp;
         @Html.ActionLink("Delete", "Delete", new { id = entry.Id })
