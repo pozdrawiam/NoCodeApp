@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Nca.Domain.Entities.Definitions;
 
 namespace Nca.Domain.Features.DataDefinitions.Get;
@@ -7,7 +8,7 @@ public class DataDefinitionGetQueryHandler(IDb db)
 {
     public async Task<DataDefinitionGetQueryResult?> ExecuteAsync(DataDefinitionGetQuery query)
     {
-        DataDefinition? entity = await db.DataDefinitions.FindAsync(query.Id);
+        DataDefinition? entity = await db.DataDefinitions.Include(x => x.Fields).FirstOrDefaultAsync(x => x.Id == query.Id);
 
         if (entity == null)
             return null;
