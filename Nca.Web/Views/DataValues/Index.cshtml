@@ -14,13 +14,25 @@
 <br>
 <br>
 
-@foreach (var entry in Model.Values)
-{
-    <div>
-        @foreach (var value in entry)
+<table>
+    <thead>
+    <tr>
+        @foreach (var field in definition.Fields)
         {
-            <span>@value &nbsp;</span>
+            <th>@field.Name</th>
         }
-    </div>
-    <br>
-}
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var entry in Model.Values)
+    {
+        <tr>
+            @foreach (var value in entry)
+            {
+                <td>@value</td>
+            }
+        </tr>
+        <br>
+    }
+    </tbody>
+</table>
