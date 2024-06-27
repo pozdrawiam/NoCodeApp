@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nca.Core.Exceptions;
 using Nca.Domain.Features.DataDefinitions.Add;
+using Nca.Domain.Features.DataDefinitions.Delete;
 using Nca.Domain.Features.DataDefinitions.Edit;
 using Nca.Domain.Features.DataDefinitions.Get;
 using Nca.Domain.Features.DataDefinitions.List;
@@ -57,6 +58,21 @@ public class DataDefinitionsController(IServiceProvider services)
     public async Task<IActionResult> Edit(DataDefinitionEditCmd cmd)
     {
         var handler = services.GetService<DataDefinitionEditCmdHandler>();
+        await handler!.ExecuteAsync(cmd);
+        
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var handler = services.GetService<DataDefinitionsDeleteCmdHandler>();
+
+        var cmd = new DataDefinitionsDeleteCmd
+        {
+            Ids = new [] { id }
+        };
+            
         await handler!.ExecuteAsync(cmd);
         
         return RedirectToAction("Index");
