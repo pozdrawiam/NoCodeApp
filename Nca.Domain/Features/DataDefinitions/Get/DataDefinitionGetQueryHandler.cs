@@ -15,7 +15,12 @@ public class DataDefinitionGetQueryHandler(IDb db)
         return new DataDefinitionGetQueryResult
         {
             Id = entity.Id,
-            Name = entity.Name
+            Name = entity.Name,
+            Fields = entity.Fields.Select(x => new DataDefinitionGetQueryResult.FieldDto
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList()
         };
     }
 }
