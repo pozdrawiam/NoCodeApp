@@ -14,8 +14,6 @@ public class DataDefinitionEditCmdHandler(IDb db)
         
         entity.Name = cmd.Name;
 
-        db.DataDefinitions.Add(entity);
-
         await db.SaveChangesAsync();
     }
 }
