@@ -12,5 +12,16 @@
     
     @Html.TextBoxFor(m => m.Name)
     
+    <fieldset>
+        <legend>Fields</legend>
+        @for (var i = 0; i < Model.Fields.Count; i++)
+        {
+            <div>
+                @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1} Name")
+                @Html.TextBoxFor(m => m.Fields[i].Name)
+            </div>
+        }
+    </fieldset>
+    
     <button type="submit">Save</button>
 }

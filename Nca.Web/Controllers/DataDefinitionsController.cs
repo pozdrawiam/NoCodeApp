@@ -53,7 +53,12 @@ public class DataDefinitionsController(IServiceProvider services)
         var cmd = new DataDefinitionEditCmd
         {
             Id = result.Id,
-            Name = result.Name
+            Name = result.Name,
+            Fields = result.Fields.Select(x => new DataDefinitionEditCmd.FieldDto
+            {
+                Id = x.Id,
+                Name = x.Name
+            }).ToList()
         };
 
         return View(cmd);
