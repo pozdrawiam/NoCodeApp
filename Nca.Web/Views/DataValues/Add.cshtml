@@ -2,8 +2,6 @@
 @model Nca.Domain.Features.DataValues.Add.DataValueAddCmd
 
 @{
-    Layout = "_Layout";
-    
     var definition = (DataDefinitionGetQueryResult)ViewBag.Definition;
     
     ViewBag.Title = $"Add {definition.Name}";
