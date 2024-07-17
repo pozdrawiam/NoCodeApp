@@ -2,10 +2,11 @@
 @model Nca.Domain.Features.DataValues.List.DataValueListQueryResult
 
 @{
-    ViewBag.Title = "title";
-    //Layout = "_Layout";
+    Layout = "_Layout";
 
     var definition = (DataDefinitionGetQueryResult)ViewBag.Definition;
+    
+    ViewBag.Title = $"{definition} data values";
 }
 
 <h2>@definition.Name data values</h2>
