@@ -4,10 +4,8 @@
 @{
     var definition = (DataDefinitionGetQueryResult)ViewBag.Definition;
     
-    ViewBag.Title = $"{definition} data values";
+    ViewBag.Title = $"{definition.Name} data values";
 }
-
-<h2>@definition.Name data values</h2>
 
 @Html.ActionLink("Add", "Add", new { id = definition.Id })
 <br>

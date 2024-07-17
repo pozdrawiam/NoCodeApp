@@ -7,8 +7,6 @@
     ViewBag.Title = $"Add {definition.Name}";
 }
 
-<h2>Add @definition.Name</h2>
-
 @using (Html.BeginForm(FormMethod.Post))
 {
     @for (var i = 0; i < Model.Fields.Count; i++)
