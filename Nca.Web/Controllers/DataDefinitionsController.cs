@@ -33,6 +33,13 @@ public class DataDefinitionsController(IServiceProvider services)
     [HttpPost]
     public async Task<IActionResult> Add(DataDefinitionAddCmd cmd)
     {
+        if (cmd.AddField)
+        {
+            cmd.Fields.Add(new DataDefinitionAddCmd.FieldDto());
+            
+            return View(cmd);
+        }
+        
         var handler = services.GetService<DataDefinitionAddCmdHandler>();
         await handler!.ExecuteAsync(cmd);
 

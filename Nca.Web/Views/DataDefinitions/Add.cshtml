@@ -1,4 +1,5 @@
-@model Nca.Domain.Features.DataDefinitions.Add.DataDefinitionAddCmd
+@using Nca.Domain.Features.DataDefinitions.Add
+@model DataDefinitionAddCmd
 
 @{
     Layout = "_Form";
@@ -19,4 +20,5 @@
             @Html.TextBoxFor(m => m.Fields[i].Name)
         </div>
     }
+    <button name="@(nameof(DataDefinitionAddCmd.AddField))" value="True">Add field</button>
 </fieldset>
