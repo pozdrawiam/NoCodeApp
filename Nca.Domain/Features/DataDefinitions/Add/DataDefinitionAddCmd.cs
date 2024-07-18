@@ -9,5 +9,6 @@ public class DataDefinitionAddCmd
     public class FieldDto
     {
         public string Name { get; set; } = "";
+        public bool Remove { get; set; }
     }
 }

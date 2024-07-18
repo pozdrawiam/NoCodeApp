@@ -38,6 +38,16 @@ public class DataDefinitionsController(IServiceProvider services)
             
             return View(cmd);
         }
+
+        var fieldsToRemove = cmd.Fields.Where(f => f.Remove).ToArray();
+
+        if (fieldsToRemove.Length > 0)
+        {
+            foreach (var field in fieldsToRemove)
+                cmd.Fields.Remove(field);
+            
+            return View(cmd);
+        }
         
         var handler = services.GetService<DataDefinitionAddCmdHandler>();
         await handler!.ExecuteAsync(cmd);

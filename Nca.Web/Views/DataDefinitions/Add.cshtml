@@ -18,6 +18,7 @@
         <div>
             @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1} Name")
             @Html.TextBoxFor(m => m.Fields[i].Name)
+            <button name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionAddCmd.FieldDto.Remove)}")" value="True">Remove</button>
         </div>
     }
     <button name="@(nameof(DataDefinitionAddCmd.AddField))" value="True">Add field</button>
