@@ -38,6 +38,15 @@ public class DataValuesController(IServiceProvider services)
         
         return View(cmd);
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> Add(DataValueAddCmd cmd)
+    {
+        var handler = services.GetService<DataValueAddCmdHandler>();
+        await handler!.ExecuteAsync(cmd);
+
+        return RedirectToAction("Index", new { id = cmd.DataDefinitionId });
+    }
 
     private async Task<DataDefinitionGetQueryResult> GetDefinition(int id)
     {
