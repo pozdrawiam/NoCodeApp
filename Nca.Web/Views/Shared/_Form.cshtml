@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @RenderBody()
+
+    @Html.ActionLink("Back", "Index")
+    <button type="submit">Save</button>
+}
