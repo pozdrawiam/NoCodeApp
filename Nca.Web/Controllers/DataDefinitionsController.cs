@@ -22,10 +22,9 @@ public class DataDefinitionsController(IServiceProvider services)
     [HttpGet]
     public IActionResult Add()
     {
-        var cmd = new DataDefinitionAddCmd
-        {
-            Fields = Enumerable.Range(0, 5).Select(x => new DataDefinitionAddCmd.FieldDto()).ToList()
-        };
+        var cmd = new DataDefinitionAddCmd();
+        
+        cmd.Fields.Add(new DataDefinitionAddCmd.FieldDto());
         
         return View(cmd);
     }
