@@ -46,6 +46,8 @@ public class DataDefinitionsController(IServiceProvider services)
             foreach (var field in fieldsToRemove)
                 cmd.Fields.Remove(field);
             
+            ModelState.Clear();
+            return View(cmd);
             return View(cmd);
         }
         
