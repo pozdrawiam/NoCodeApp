@@ -1,27 +1,22 @@
 @model Nca.Domain.Features.DataDefinitions.Edit.DataDefinitionEditCmd
 
 @{
+    Layout = "_Form";
     ViewBag.Title = "Edit data definition";
 }
 
-@using (Html.BeginForm(FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.Id)
     
-    @Html.TextBoxFor(m => m.Name)
+@Html.TextBoxFor(m => m.Name)
     
-    <fieldset>
-        <legend>Fields</legend>
-        @for (var i = 0; i < Model.Fields.Count; i++)
-        {
-            <div>
-                @Html.HiddenFor(m => m.Fields[i].Id)
-                @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1} Name")
-                @Html.TextBoxFor(m => m.Fields[i].Name)
-            </div>
-        }
-    </fieldset>
-    
-    @Html.ActionLink("Back", "Index")
-    <button type="submit">Save</button>
-}
+<fieldset>
+    <legend>Fields</legend>
+    @for (var i = 0; i < Model.Fields.Count; i++)
+    {
+        <div>
+            @Html.HiddenFor(m => m.Fields[i].Id)
+            @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1} Name")
+            @Html.TextBoxFor(m => m.Fields[i].Name)
+        </div>
+    }
+</fieldset>
