@@ -18,7 +18,29 @@
         <div>
             @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1}.")
             @Html.TextBoxFor(m => m.Fields[i].Name)
-            <button name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionAddCmd.FieldDto.Remove)}")" value="True">Remove</button>
+            
+            <button
+                name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionAddCmd.FieldDto.Up)}")"
+                value="True"
+                @if (i == 0) { <text>disabled="disabled"</text> }
+                >
+                Up
+            </button>
+
+            <button
+                name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionAddCmd.FieldDto.Down)}")"
+                value="True"
+                @if (i == Model.Fields.Count - 1) { <text>disabled="disabled"</text> }
+                >
+                Down
+            </button>
+            
+            <button
+                name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionAddCmd.FieldDto.Remove)}")"
+                value="True"
+                >
+                Remove
+            </button>
         </div>
     }
     <button name="@(nameof(DataDefinitionAddCmd.AddField))" value="True">Add field</button>

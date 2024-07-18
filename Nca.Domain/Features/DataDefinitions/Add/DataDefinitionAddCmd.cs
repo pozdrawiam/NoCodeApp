@@ -10,5 +10,7 @@ public class DataDefinitionAddCmd
     {
         public string Name { get; set; } = "";
         public bool Remove { get; set; }
+        public bool Up { get; set; }
+        public bool Down { get; set; }
     }
 }
