@@ -107,6 +107,47 @@ public class DataDefinitionsController(IServiceProvider services)
     [HttpPost]
     public async Task<IActionResult> Edit(DataDefinitionEditCmd cmd)
     {
+        if (cmd.AddField)
+        {
+            cmd.Fields.Add(new DataDefinitionEditCmd.FieldDto());
+            
+            return View(cmd);
+        }
+
+        var fieldsToRemove = cmd.Fields.Where(f => f.Remove).ToArray();
+
+        if (fieldsToRemove.Length > 0)
+        {
+            foreach (var field in fieldsToRemove)
+                cmd.Fields.Remove(field);
+            
+            ModelState.Clear();
+            return View(cmd);
+        }
+
+        var fieldsToMove = cmd.Fields.Where(f => f.Up || f.Down).ToArray();
+        
+        if (fieldsToMove.Length > 0)
+        {
+            foreach (var field in fieldsToMove)
+            {
+                var index = cmd.Fields.IndexOf(field);
+
+                if (field.Up && index > 0)
+                {
+                    (cmd.Fields[index - 1], cmd.Fields[index]) = (cmd.Fields[index], cmd.Fields[index - 1]);
+                }
+
+                if (field.Down && index < cmd.Fields.Count - 1)
+                {
+                    (cmd.Fields[index + 1], cmd.Fields[index]) = (cmd.Fields[index], cmd.Fields[index + 1]);
+                }
+            }
+
+            ModelState.Clear();
+            return View(cmd);
+        }
+        
         var handler = services.GetService<DataDefinitionEditCmdHandler>();
         await handler!.ExecuteAsync(cmd);
 

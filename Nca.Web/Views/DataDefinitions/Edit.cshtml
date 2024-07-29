@@ -1,3 +1,4 @@
+@using Nca.Domain.Features.DataDefinitions.Edit
 @model Nca.Domain.Features.DataDefinitions.Edit.DataDefinitionEditCmd
 
 @{
@@ -7,16 +8,42 @@
 
 @Html.HiddenFor(m => m.Id)
     
-@Html.TextBoxFor(m => m.Name)
+<div>
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name)
+</div>
     
 <fieldset>
     <legend>Fields</legend>
     @for (var i = 0; i < Model.Fields.Count; i++)
     {
         <div>
-            @Html.HiddenFor(m => m.Fields[i].Id)
-            @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1} Name")
+            @Html.LabelFor(m => m.Fields[i].Name, $"{i + 1}.")
             @Html.TextBoxFor(m => m.Fields[i].Name)
+            
+            <button
+                name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionEditCmd.FieldDto.Up)}")"
+                value="True"
+                @if (i == 0) { <text>disabled="disabled"</text> }
+            >
+                Up
+            </button>
+
+            <button
+                name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionEditCmd.FieldDto.Down)}")"
+                value="True"
+                @if (i == Model.Fields.Count - 1) { <text>disabled="disabled"</text> }
+            >
+                Down
+            </button>
+            
+            <button
+                name="@($"{nameof(Model.Fields)}[{i}].{nameof(DataDefinitionEditCmd.FieldDto.Remove)}")"
+                value="True"
+            >
+                Remove
+            </button>
         </div>
     }
+    <button name="@(nameof(DataDefinitionEditCmd.AddField))" value="True">Add field</button>
 </fieldset>
